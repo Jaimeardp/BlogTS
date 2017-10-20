@@ -1,0 +1,32 @@
+<!--<h1>User Component</h1>
+
+<pre>
+	{{users | json}}
+</pre>-->
+
+<style type="text/css">
+	.ListaCus{
+		padding-top: 45px;
+	}
+</style>
+
+<div  *ngIf="tipo === 1" >
+	<app-user-new (createNewUserEvent)="create($event)"></app-user-new>
+</div>
+
+<div class="ListaCus" *ngIf="tipo === 2">
+	<h1>Hola Mariana</h1>
+	<script type="text/javascript">
+		console.log("Hola Mariana")
+	</script>
+	<app-user-list 
+	[users]="users"
+    (destroyUserEvent)="destroy($event)"
+    (updateUserEvent)="update($event)"
+	>
+	</app-user-list>	
+</div>
+
+
+<app-user-login *ngIf="false"></app-user-login>
+

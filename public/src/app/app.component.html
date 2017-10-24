@@ -1,63 +1,79 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<!--<div style="text-align:center">
-  <h1>
-    Welcome to {{title}}!
-  </h1>
-  <img width="300" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<input type="text" [(ngModel)]="name" />
-<p>{{name}}</p>
-<a class="btn btn-primary">Boton De Bootstrap</a>
-<div class="col-md-6">
-  <h2>Listado De Titulos De Blog</h2>
-  <ul class="list-group">
-    <li (click)="viewNote(n)" class="list-group-item" *ngFor="let n of mynotes">{{n.id}} {{n.title}}</li>
-  </ul>
-  <a class="btn btn-primary btn-block" (click)="addNote()">Nuevo Comentario</a>  
-</div>
-<div class="col-md-6" *ngIf="show_form">
-  <h2>Nuevo Blog</h2>
-  <input class="form-control" type="text" placeholder="Escriba aqui" [(ngModel)]="note.title"/>
-  <br/>
-  <textarea class="form-control" placeholder="Escriba" [(ngModel)]="note.content"></textarea>
-  <hr/>
-  <div class="row">
-    <div class="col-md-6">
-      <a class="btn btn-primary btn-block" (click)="cancel()">Cancelar</a>  
-    </div>
-    <div class="col-md-6">
-      <a class="btn btn-primary btn-block" (click)="createNote()">Guardar</a>  
-    </div>
-  </div>
-</div> -->
-
+<style type="text/css">
+  nav{
+    position: fixed;
+    width: 100%;
+    background:  rgba(246, 30, 192, 0.04);
+    z-index: 10;
+  }
+  #Respeta{
+    margin: auto;
+    padding-bottom: 80px;
+  }
+</style>
 <div>
-  <div>
-    <app-header> </app-header>
-  </div>
-  <div>
-    <router-outlet></router-outlet>
-  </div>
-  <div>
-    <app-footer></app-footer>
-  </div>
-  <!--<app-login-form></app-login-form>-->
-  
+  <div id="Respeta">
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a routerLink="/" class="navbar-brand" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Brand</a>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a routerLink="/login-form" routerLinkActive="active" *ngIf="!auth.loggedIn">Login <span class="sr-only">(current)</span></a></li>
+        <li><a href="#">Visitante</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Usuario <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Editar</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a (click)="listUsuario()">Listar</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Eliminar</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Permisos</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Historial</a></li>
+          </ul>
+        </li>
+      </ul>
+      <form class="navbar-form navbar-left">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a routerLink="/logout" routerLinkActive="active" *ngIf="auth.loggedIn">Logout</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+</div>
+<div class="container">
+  <router-outlet></router-outlet>
 </div>
 
-
-<!--<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>-->
+  <app-footer></app-footer>
+</div>
 
 
 

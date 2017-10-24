@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { UserService } from './user.service'; // (./) Desde aqui mismo nivel
+import { UserService } from '../services/user.service'; // (./) Desde aqui mismo nivel
 import { User } from './user';
 
 @Component({
@@ -32,30 +32,35 @@ export class UsuarioComponent implements OnInit {
 
   Login(user:User){
     this._userService.login(user)
-      .then(usuario => this.users = usuario);
+      .subscribe(
+        usuario => setTimeout(()  => this.users = usuario,0),
+        error => console.log('Jaime Te Equivocaste')
+      );
   }
 
   getUsers(){
     console.log("Lista Por Favor")
   	this._userService.getUsers()
-  		.then(usuarios => this.users = usuarios);
+  		.subscribe(usuarios => this.users = usuarios);
   }
 
   create(user:User){
-    console.log("Jaime Mariana");
-      this._userService.create(user)
+    /*console.log("Jaime Mariana");
+      this._userService.addUser(user)
       .then(status => this.getUsers())
       .catch(err => console.log(err));
     /*console.log("Vital");
     console.log(user);
     this.users.push(user);
-    this._userService.create(user);
+    this._userService.addUser(user);
     console.log(this.users)*/
+    this._userService.addUser(user).
+    subscribe(status => this.getUsers())
   }
 
-  destroy(user:User){
+  /*destroy(user:User){
     const i = this.users.indexOf(user); 
     this.users.splice(i,1)
-  }
+  }*/
 
 }

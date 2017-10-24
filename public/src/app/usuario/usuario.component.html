@@ -20,13 +20,12 @@
 		console.log("Hola Mariana")
 	</script>
 	<app-user-list 
-	[users]="users"
-    (destroyUserEvent)="destroy($event)"
-    (updateUserEvent)="update($event)"
-	>
+	[users]="users">
 	</app-user-list>	
 </div>
 
 
 <app-user-login *ngIf="false"></app-user-login>
 
+  <!--(destroyUserEvent)="destroy($event)"
+    (updateUserEvent)="update($event)"-->

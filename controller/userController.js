@@ -1,10 +1,10 @@
 'use strict'
 
 const User = require('../modelos/users')
-//const service = require('../services')
+const service = require('../services')
 
 function signUp (req, res) {
-  console.log('Erro de reacion')
+  //console.log('Erro de reacion')
   const user = new User({
     name: req.body.name,
     email: req.body.email,
@@ -12,14 +12,21 @@ function signUp (req, res) {
     password: req.body.password
   })
 
-  user.save((err, userS) => {
+  /*user.save((err, userS) => {
+    if (err){
+      return res.status(500).send({ message: `Error al crear el usuario: ${err}` })
+    }
+    return res.status(201).send({ user:userS })
+  })*/
+  user.save((err) => {
     if (err) return res.status(500).send({ message: `Error al crear el usuario: ${err}` })
 
-    return res.status(201).send({ user:userS })
+    return res.status(201).send({ token: service.createToken(user) })
   })
 }
 
 function signIn (req, res) {
+  console.log("Cansado Papu")
   User.find({ email: req.body.email }, (err, user) => {
     if (err) return res.status(500).send({ message: err })
     if (!user) return res.status(404).send({ message: 'No existe el usuario' })
@@ -27,7 +34,7 @@ function signIn (req, res) {
     req.user = user
     res.status(200).send({
       message: 'Te has logueado correctamente',
-      //token: service.createToken(user)
+      token: service.createToken(user)
     })
   })
 }

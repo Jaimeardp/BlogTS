@@ -38,7 +38,20 @@ table caption {
 }
 </style>
 
+{{time()}}
+
+
+<button (click)="getusers()">Reload</button>
+
+<pre>
+  {{users |json}}
+</pre>
+
+
+
 <h2>Responsive Table with Bootstrap</h2>
+
+
 
 <div class="container">
   <div class="row">
@@ -55,8 +68,8 @@ table caption {
           </thead>
           <tbody>
             <tr *ngFor="let user of users">
+            	<td>{{user._id}}</td>
             	<td>{{user.name}}</td>
-            	<td>{{user.username}}</td>
             	<td>{{user.email}}</td>
             </tr>
           </tbody>
@@ -70,5 +83,7 @@ table caption {
     </div>
   </div>
 </div>
+
+
 
 <p class="p">Demo by George Martsoukos. <a href="http://www.sitepoint.com/responsive-data-tables-comprehensive-list-solutions" target="_blank">See article</a>.</p>

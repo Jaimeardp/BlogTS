@@ -9,21 +9,21 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
 
-	tipolis = 0;
+	//tipolis = 0;
 
   constructor(private router:Router,public auth: AuthService){
   	console.log("Warning!!!");
   }
 
-   listUsuario(){
+   /*listUsuario(){
    	console.log("Martes Octubre");
   	this.tipolis = 2;
     if(this.auth.loggedIn){
       console.log("Mariana Novoa Bardale");
-      this.router.navigate(['/usuario',this.tipolis]);
+      this.router.navigate(['usuario',this.tipolis]);
     }else{
       this.router.navigate(['/']);
     }
   	return false;
-  }
+  }*/
 }

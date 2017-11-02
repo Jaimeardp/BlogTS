@@ -47,20 +47,6 @@ export class LoginFormComponent implements OnInit {
     );
   }
 
-  loginUser(e){
-  	e.preventDefault();
-  	console.log(e);
-  	var username = e.target.elements[1].value;
-  	var pass = e.target.elements[2].value;
-  	console.log(username);
-  	console.log(pass);
-
-  	 if(username == 'admin' && pass == 'admin') {
-      //this.user.setUserLoggedIn();
-  		this.router.navigate(['/dashboard']);
-  	}
-  	return false;
-  }
 
   createUser(){
     this.tipo = 1;

@@ -5,13 +5,15 @@ const moment = require('moment')
 const config = require('../config')
 
 function createToken (user) {
+  console.log(user)
   const payload = {
     sub: user._id,
     iat: moment().unix(),
     exp: moment().add(14, 'days').unix()
   }
-
-  return jwt.encode(payload, config.SECRET_TOKEN)
+  console.log("below enconde -->")
+  //console.log(jwt.encode(user, config.SECRET_TOKEN));
+  return jwt.encode({user:user}, config.SECRET_TOKEN)
 }
 
 function decodeToken (token) {
@@ -36,6 +38,7 @@ function decodeToken (token) {
 
   return decoded
 }
+
 
 module.exports = {
   createToken,

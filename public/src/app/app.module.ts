@@ -10,6 +10,8 @@ import { UserEditComponent } from './usuario/user-edit/user-edit.component';
 import { UserDetailsComponent } from './usuario/user-details/user-details.component';
 import { LogoutComponent } from './logout/logout.component';
 
+
+
 import{HttpModule} from '@angular/http'
 
 import { RoutingModule } from './routing.module';
@@ -23,10 +25,9 @@ import { FooterComponent } from './footer/footer.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AboutComponent } from './about/about.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 import {RouterModule, Routes} from '@angular/router';
-
-
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import {RouterModule, Routes} from '@angular/router';
     LoginFormComponent,
     DashboardComponent,
     AboutComponent,
-    LogoutComponent
+    LogoutComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -51,6 +53,7 @@ import {RouterModule, Routes} from '@angular/router';
     HttpModule,
     RoutingModule,
     ReactiveFormsModule
+ 
   ],
   providers: [
     UserService,

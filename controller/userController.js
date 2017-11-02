@@ -9,7 +9,8 @@ function signUp (req, res) {
     name: req.body.name,
     email: req.body.email,
     username: req.body.username,
-    password: req.body.password
+    password: req.body.password,
+    role: req.body.role
   })
 
   /*user.save((err, userS) => {
@@ -25,18 +26,43 @@ function signUp (req, res) {
   })
 }
 
-function signIn (req, res) {
+/*function signIn (req, res) {
   console.log("Cansado Papu")
-  User.find({ email: req.body.email }, (err, user) => {
+  User.findOne({ username: req.body.username }, (err, user) => {
     if (err) return res.status(500).send({ message: err })
     if (!user) return res.status(404).send({ message: 'No existe el usuario' })
 
     req.user = user
     res.status(200).send({
       message: 'Te has logueado correctamente',
-      token: service.createToken(user)
+      token: service.createToken(user),
     })
   })
+}*/
+
+function signIn(req, res){
+    // find the user
+    console.log("Cansado Papu")
+    User.findOne({ username: req.body.username },( err, user) => {
+    if(err){ res.status(400).json({ success: false, message:'Error processing request '+ err}); }
+    if (!user) {
+      console.log(user)
+      res.status(201).json({ success: false, message: 'Incorrect login credentials.' });
+    }else if (user) {
+      console.log("2 NIVEL")
+      console.log(user)
+      console.log(req.body.password)
+          user.comparePassword(req.body.password,(err, isMatch)=> {
+              if (isMatch && !err) {
+                console.log("Login correcto")
+                    res.status(200).send({
+                      message:'Te has logueado correctamente',
+                      token: service.createToken(user)
+                    })
+              }
+            })
+        }
+     })                      
 }
 
 function deleteUser (req, res) {
@@ -58,6 +84,7 @@ function getUsers (req, res) {
     if (!user) return res.status(404).send({message: 'No existen productos'})
 
     res.status(200).send(user)
+  //res.json(user)
   })
 }
 

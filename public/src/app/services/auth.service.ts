@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Http, Response, Headers, RequestOptions} from '@angular/http';
 import { JwtHelper } from 'angular2-jwt';
 
 import { UserService } from '../services/user.service';
@@ -9,17 +10,25 @@ export class AuthService {
   loggedIn = false;
   isAdmin = false;
 
+  
+
   jwtHelper: JwtHelper = new JwtHelper();
 
   currentUser = { _id: '', username: '', role: '' };
 
+
   constructor(private userService: UserService,
               private router: Router) {
-    console.log("eNTA");
-    const token = localStorage.getItem('acces_token');
+    //var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    //console.log(currentUser);
+
+    console.log("-------------Entra Constructor Auth Service----------------");
+    const token = localStorage.getItem('token');
     console.log(token);
     if (token) {
       const decodedUser = this.decodeUserFromToken(token);
+      console.log(decodedUser);
+      console.log("Acontinuacion Decode User");
       this.setCurrentUser(decodedUser);
     }
   }
@@ -27,40 +36,52 @@ export class AuthService {
   login(emailAndPassword) {
     return this.userService.login(emailAndPassword).map(res => res.json()).map(
       res => {
+        
+        //localStorage.setItem('currentUser',JSON.stringify(emailAndPassword));
         localStorage.setItem('token', res.token);
+
         const decodedUser = this.decodeUserFromToken(res.token);
+
         console.log(decodedUser);
+        //console.log();
         
         this.setCurrentUser(decodedUser);
+
         console.log("Verificar Boolean");
         console.log(this.loggedIn);
+
         return this.loggedIn;
       }
     );
   }
 
   logout() {
-    localStorage.removeItem('acces_token');
+    localStorage.removeItem('token');
     this.loggedIn = false;
     this.isAdmin = false;
-    console.log(this.currentUser);
+    //console.log(this.currentUser);
     //this.currentUser = { _id: '', username: '', role: '' };
     this.router.navigate(['/']);
   }
 
   decodeUserFromToken(token) {
+    console.log("below decode")
+    console.log(this.jwtHelper.decodeToken(token));
+
     return this.jwtHelper.decodeToken(token);
 
   }
 
   setCurrentUser(decodedUser){
     this.loggedIn = true;
-    //this.currentUser._id = decodedUser._id;
-    //this.currentUser.username = decodedUser.username;
-    //this.currentUser.role = decodedUser.role;
+    console.log(decodedUser);
+    this.currentUser._id = decodedUser._id;
+    //console.log(this.currentUser._id);
+    this.currentUser.username = decodedUser.username;
+    this.currentUser.role = decodedUser.role;
+    decodedUser.role === 'admin' ? this.isAdmin = true : this.isAdmin = false;
+    delete decodedUser.role;
     console.log(this.currentUser);
-    //decodedUser.role === 'admin' ? this.isAdmin = true : this.isAdmin = false;
-    //delete decodedUser.role;
   }
 
 }

@@ -1,31 +1,47 @@
-<!--<h1>User Component</h1>
+<h1>User Component</h1>
 
 <pre>
-	{{users | json}}
-</pre>-->
+	{{ usersArr | json}}
+</pre>
 
+<h1>{{cad}}</h1>
+
+
+<h1>Miercoles 2017</h1>
+
+
+<!-- 
 <style type="text/css">
 	.ListaCus{
 		padding-top: 45px;
 	}
 </style>
 
-<div  *ngIf="tipo === 1" >
+<div  *ngIf="tipo === 'list' " >
+	<h1>Argumentos Uno</h1>
 	<app-user-new (createNewUserEvent)="create($event)"></app-user-new>
 </div>
 
-<div class="ListaCus" *ngIf="tipo === 2">
-	<h1>Hola Mariana</h1>
-	<script type="text/javascript">
-		console.log("Hola Mariana")
-	</script>
-	<app-user-list 
-	[users]="users">
+
+<div class="ListaCus">
+	<h1>Hola Bug</h1>
+	<app-user-list [users]='usersArr'>
 	</app-user-list>	
 </div>
 
+<app-user-login *ngIf="false"></app-user-login> -->
 
-<app-user-login *ngIf="false"></app-user-login>
+
+
+
+
+<router-outlet></router-outlet>	
+
+
+
+
+
+
 
   <!--(destroyUserEvent)="destroy($event)"
     (updateUserEvent)="update($event)"-->

@@ -10,6 +10,7 @@ import { UserListComponent } from './usuario/user-list/user-list.component';
 import { UserEditComponent } from './usuario/user-edit/user-edit.component';
 import { UserDetailsComponent } from './usuario/user-details/user-details.component';
 import { AboutComponent } from './about/about.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 import {UserService} from './services/user.service';
 import {AuthService} from './services/auth.service';
@@ -29,7 +30,25 @@ const routes:Routes = [
     component:AboutComponent
   },
   {
-    path:'login-form',
+    path:'usuario',
+    //component:UsuarioComponent,
+    children:[
+      {
+        path:'lista',
+        component:UserListComponent
+      },
+      {
+        path:'new',
+        component:UserNewComponent
+      }
+    ]
+  },
+  {
+    path:'list',
+    component:UserListComponent
+  },
+  {
+    path:'login',
     component:LoginFormComponent
   },
   {
@@ -47,11 +66,15 @@ const routes:Routes = [
   {
     path:'logout',
     component:LogoutComponent
+  },
+  {
+    path:'**',
+    component:NotFoundComponent
   }
-]
+];
 
 @NgModule({
-  imports: [ RouterModule.forRoot(routes) ],
+  imports: [ RouterModule.forRoot(routes,{useHash:true}) ],
   exports: [ RouterModule ]
 })
 
